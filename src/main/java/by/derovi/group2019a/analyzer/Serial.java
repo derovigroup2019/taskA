@@ -43,3 +43,4 @@ public class Serial {
         this.seasons = seasons;
     }
 }
+

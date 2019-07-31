@@ -72,7 +72,9 @@ public class Analyzer {
                     }
                 }
             }
-            outputLines.add(new OutputLine(serial.getName() + " - " + Integer.toString(count) + " words. Average word length is " + getAverage(length, count) + " letters, average duration is " + getAverage(duration / 1000, count) + " s. (" + getAverage(60, Double.parseDouble(getAverage(duration / 1000, count))) + " words per minute)", count));
+            outputLines.add(new OutputLine(serial.getName() + " - " + Integer.toString(count) + " words. Average word length is " +
+                    getAverage(length, count) + " letters, average duration is " + getAverage(duration / 1000, count) + " s. (" +
+                    getAverage(60, Double.parseDouble(getAverage(duration / 1000, count))) + " words per minute)", count));
             wordsCount += count;
             wordsLength += length;
             wordsDuration += duration;
@@ -80,7 +82,10 @@ public class Analyzer {
         Collections.sort(outputLines, Collections.reverseOrder());
         for(OutputLine outputLine : outputLines)
             outputLine.print();
-        System.out.println("------------------------\n" + Integer.toString(serials.size()) + " serials, " + Integer.toString(wordsCount) + " words. Average word length is " + getAverage(wordsLength, wordsCount) + " letters, average duration is " + getAverage(wordsDuration / 1000, wordsCount) + " s. (" + getAverage(60, Double.parseDouble(getAverage(wordsDuration / 1000, wordsCount))) + " words per minute)");
+        System.out.println("------------------------\n" + Integer.toString(serials.size()) + " serials, " + Integer.toString(wordsCount) +
+                " words. Average word length is " + getAverage(wordsLength, wordsCount) +
+                " letters, average duration is " + getAverage(wordsDuration / 1000, wordsCount) +
+                " s. (" + getAverage(60, Double.parseDouble(getAverage(wordsDuration / 1000, wordsCount))) + " words per minute)");
     }
 
     public void wordsTypes() {
@@ -201,7 +206,7 @@ public class Analyzer {
         prepare();
         System.out.println();
         List<OutputLine> outputLines = new ArrayList<>();
-        Set<String> uniqueWords = new HashSet<>();
+        Set<String> uniqueWords = new TreeSet<>();
         for(Serial serial : serials) {
             Map<String, Integer> words = new HashMap<>();
             for(Season season : serial.getSeasons()) {
@@ -227,9 +232,10 @@ public class Analyzer {
                     usedCount = entry.getValue();
                 }
             }
-            outputLines.add(new OutputLine(serial.getName() + " - " + Integer.toString(words.size()) + " unique words. Most used is " + mostUsed + ", " + usedCount + " entries.", words.size()));
+            outputLines.add(new OutputLine(serial.getName() + " - " + Integer.toString(words.size()) + " unique words. Most used is " +
+                    mostUsed + ", " + usedCount + " entries.", words.size()));
         }
-        Collections.sort(outputLines);
+        Collections.sort(outputLines, Collections.reverseOrder());
         for(OutputLine outputLine : outputLines)
             outputLine.print();
         System.out.println("------------------------\n" + Integer.toString(serials.size()) + " serials, " + Integer.toString(uniqueWords.size()) + " unique words.");
@@ -239,7 +245,7 @@ public class Analyzer {
         prepare();
         System.out.println();
         List<OutputLine> outputLines = new ArrayList<>();
-        Map<String, Integer> words = new HashMap();
+        Map<String, Integer> words = new HashMap<>();
         for(Serial serial : serials) {
             for(Season season : serial.getSeasons()) {
                 for(Episode episode : season.getEpisodes()) {
@@ -262,7 +268,8 @@ public class Analyzer {
         }
         Collections.sort(popularWords, Collections.reverseOrder());
         for(int idx = 0; idx < Math.min(30, popularWords.size()); ++ idx) {
-            outputLines.add(new OutputLine(Integer.toString(idx + 1) + ". " + popularWords.get(idx).getLine() + " - " + Integer.toString(popularWords.get(idx).getPriority()) + " entries", popularWords.get(idx).getPriority()));
+            outputLines.add(new OutputLine(Integer.toString(idx + 1) + ". " + popularWords.get(idx).getLine() + " - " +
+                    Integer.toString(popularWords.get(idx).getPriority()) + " entries", popularWords.get(idx).getPriority()));
         }
         Collections.sort(outputLines, Collections.reverseOrder());
         for(OutputLine outputLine : outputLines)

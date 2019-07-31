@@ -8,6 +8,7 @@ public class Bootloader {
         Managers.initOpenSubtitlesManager(Managers.getSettingsManager().getLogin(), Managers.getSettingsManager().getPassword());
         Managers.initDialogManager();
         Managers.initAnalyzer();
+        Managers.getDialogManager().start();
     }
 }
 

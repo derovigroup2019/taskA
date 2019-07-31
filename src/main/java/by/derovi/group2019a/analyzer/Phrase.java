@@ -26,7 +26,7 @@ public class Phrase {
         }
         String text = stringBuilder.toString();
         text = removeTags(text);
-        String[] strings = text.split("\\s*[\\.|\\?|!]+\\s*");
+        String[] strings = text.split("\\s*[\\.\\?|!]+\\s*");
         for(String str : strings) {
             if(str.length() < 2) continue;
             sentences.add(new Sentence(str));

@@ -40,3 +40,4 @@ public class Managers {
         analyzer = new Analyzer();
     }
 }
+

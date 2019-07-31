@@ -18,11 +18,12 @@ public class CommandTest extends Command{
         int series = Integer.parseInt(args[1]);
 
         try {
+            Managers.getOpenSubtitlesManager().auth();
             List<SubtitleInfo> subtitles = Managers.getOpenSubtitlesManager().getClient().searchSubtitles("eng", "house", Integer.toString(season), Integer.toString(series));
             for(SubtitleInfo info : subtitles) {
                 System.out.println(info.getFileName());
                 if(Managers.getOpenSubtitlesManager().isSubtitleFits("house", info.getFileName())) {
-                    System.out.println("FITS!!!");
+                    //System.out.println("FITS!!!");
                     //System.out.println(info.getZipDownloadLink());
                 }
             }

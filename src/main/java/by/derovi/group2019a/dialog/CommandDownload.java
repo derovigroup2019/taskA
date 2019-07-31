@@ -26,7 +26,6 @@ public class CommandDownload extends Command{
             subtitlesFolder.mkdir();
         }
         List<String> notFound = new ArrayList<>();
-        int skippedCount = 0, globalSeasonCount, globalSeriesCount;
         for(String serialName : Managers.getSettingsManager().getSerials()) {
             File serialFolder = new File(Managers.getSettingsManager().getSubtitlesFolder() + '/' + serialName);
             if(!serialFolder.exists())
@@ -41,7 +40,6 @@ public class CommandDownload extends Command{
                         File seriesFile = new File(Managers.getSettingsManager().getSubtitlesFolder() + '/' + serialName + "/season" + Integer.toString(season) + "/series" + Integer.toString(series) + ".srt");
                         if(seriesFile.exists()) {
                             seasonExist = true;
-                            skippedCount ++;
                             for(int idx = 0; idx <= seriesSkipped; ++ idx)
                                 subtitles.add(null);
                             seriesSkipped = 0;
